@@ -3,230 +3,1247 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ESENCIA - CS2 Team</title>
-    <!-- Fuente futurista -->
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
+    <title>ES3 ESENCIA - Team CS2</title>
     <style>
-        /* Reset */
-        * {margin:0; padding:0; box-sizing:border-box;}
-        body {
-            font-family: 'Orbitron', sans-serif;
-            background-color: #0a0a0a;
-            color: #fff;
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
         }
-        a {text-decoration:none; color: #ff2a68;}
-        img {max-width:100%; display:block;}
 
-        /* HEADER */
-        header {
+        body {
+            font-family: 'Arial Black', Arial, sans-serif;
+            background: #0a0a0a;
+            color: #fff;
+            overflow-x: hidden;
+            padding-top: 80px;
+        }
+
+        nav {
             position: fixed;
-            top:0; left:0; right:0;
-            background: rgba(10,10,10,0.95);
+            top: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(180deg, #0a0a0a 0%, rgba(10, 10, 10, 0.95) 100%);
+            backdrop-filter: blur(10px);
+            border-bottom: 2px solid #d4af37;
+            z-index: 1000;
+            padding: 0 40px;
+        }
+
+        .nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 15px 50px;
-            z-index: 1000;
-            border-bottom: 2px solid #ff2a68;
+            height: 80px;
         }
-        header h1 {
-            font-size: 2rem;
-            color: #ff2a68;
-        }
-        nav a {
-            margin-left: 25px;
-            font-weight: bold;
-            transition: 0.3s;
-        }
-        nav a:hover {color:#ff78a6;}
 
-        /* HERO */
-        .hero {
-            height: 90vh;
-            background: linear-gradient(135deg,#0a0a0a,#1c1c1c), url('https://images.unsplash.com/photo-1603783184167-95e6e3e4f490?auto=format&fit=crop&w=1950&q=80') center/cover no-repeat;
+        .nav-logo {
+            font-size: 32px;
+            font-weight: 900;
+            letter-spacing: -2px;
+            background: linear-gradient(180deg, #fff 0%, #e0e0e0 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            padding: 8px 15px;
+            border: 2px solid #d4af37;
+            border-radius: 5px;
+            transform: skewX(-5deg);
+        }
+
+        .nav-menu {
             display: flex;
-            justify-content: center;
-            align-items: center;
-            flex-direction: column;
-            text-align: center;
-            color:#fff;
+            gap: 5px;
+            list-style: none;
+        }
+
+        .nav-menu li a {
+            display: block;
+            color: #fff;
+            text-decoration: none;
+            padding: 10px 25px;
+            font-size: 14px;
+            font-weight: 700;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            transition: all 0.3s;
+            border-radius: 5px;
             position: relative;
         }
-        .hero::after {
-            content:'';
-            position:absolute;
-            top:0; left:0; right:0; bottom:0;
-            background: rgba(0,0,0,0.5);
-        }
-        .hero h2 {
-            font-size:4rem;
-            z-index:1;
-            color:#ff2a68;
-        }
-        .hero p {
-            font-size:1.5rem;
-            margin-top:15px;
-            z-index:1;
+
+        .nav-menu li a::before {
+            content: '';
+            position: absolute;
+            bottom: 5px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 0;
+            height: 2px;
+            background: #d4af37;
+            transition: width 0.3s;
         }
 
-        section {padding:100px 50px;}
+        .nav-menu li a:hover {
+            color: #d4af37;
+        }
 
-        /* ROSTER */
-        #roster h2 {text-align:center; font-size:2.5rem; color:#ff2a68; margin-bottom:50px;}
-        .roster {
+        .nav-menu li a:hover::before {
+            width: 60%;
+        }
+
+        .nav-toggle {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            cursor: pointer;
+            padding: 10px;
+        }
+
+        .nav-toggle span {
+            width: 30px;
+            height: 3px;
+            background: #d4af37;
+            border-radius: 2px;
+            transition: all 0.3s;
+        }
+
+        .nav-toggle.active span:nth-child(1) {
+            transform: rotate(45deg) translate(8px, 8px);
+        }
+
+        .nav-toggle.active span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .nav-toggle.active span:nth-child(3) {
+            transform: rotate(-45deg) translate(8px, -8px);
+        }
+
+        .background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at 50% 50%, #1a1a1a 0%, #0a0a0a 100%);
+            z-index: -1;
+        }
+
+        .background::before {
+            content: '';
+            position: absolute;
+            width: 200%;
+            height: 200%;
+            background: 
+                linear-gradient(45deg, transparent 45%, rgba(212, 175, 55, 0.03) 50%, transparent 55%),
+                linear-gradient(-45deg, transparent 45%, rgba(212, 175, 55, 0.03) 50%, transparent 55%);
+            background-size: 60px 60px;
+            animation: gridMove 20s linear infinite;
+        }
+
+        @keyframes gridMove {
+            0% { transform: translate(0, 0); }
+            100% { transform: translate(60px, 60px); }
+        }
+
+        header {
+            text-align: center;
+            padding: 80px 20px 60px;
+            position: relative;
+        }
+
+        .logo-container {
+            display: inline-block;
+            position: relative;
+            animation: logoFloat 3s ease-in-out infinite;
+        }
+
+        @keyframes logoFloat {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .logo {
+            font-size: 120px;
+            font-weight: 900;
+            letter-spacing: -5px;
+            background: linear-gradient(180deg, #fff 0%, #e0e0e0 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 0 30px rgba(212, 175, 55, 0.5);
+            position: relative;
+            display: inline-block;
+            padding: 20px 40px;
+            border: 4px solid #d4af37;
+            border-radius: 10px;
+            transform: skewX(-5deg);
+            background-color: #1a1a1a;
+        }
+
+        .subtitle {
+            font-size: 36px;
+            letter-spacing: 8px;
+            color: #d4af37;
+            margin-top: 20px;
+            text-transform: uppercase;
+        }
+
+        .team-stats {
+            display: flex;
+            justify-content: center;
+            gap: 60px;
+            margin: 40px 0;
+            flex-wrap: wrap;
+        }
+
+        .stat-box {
+            background: linear-gradient(135deg, #1a1a1a 0%, #0f0f0f 100%);
+            border: 2px solid #d4af37;
+            padding: 30px 40px;
+            border-radius: 10px;
+            text-align: center;
+            transform: skewX(-5deg);
+            transition: all 0.3s;
+        }
+
+        .stat-box:hover {
+            transform: skewX(-5deg) scale(1.05);
+            box-shadow: 0 0 30px rgba(212, 175, 55, 0.5);
+        }
+
+        .stat-number {
+            font-size: 48px;
+            color: #d4af37;
+            font-weight: 900;
+        }
+
+        .stat-label {
+            font-size: 14px;
+            color: #888;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-top: 10px;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 48px;
+            margin: 80px 0 60px;
+            text-transform: uppercase;
+            letter-spacing: 4px;
+            position: relative;
+            display: inline-block;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, transparent, #d4af37, transparent);
+        }
+
+        .players-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit,minmax(220px,1fr));
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
             gap: 30px;
-            justify-items: center;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 40px;
         }
-        .player {
-            background: #1a1a1a;
-            border: 2px solid #ff2a68;
+
+        .player-card {
+            background: linear-gradient(135deg, #1a1a1a 0%, #0f0f0f 100%);
+            border: 3px solid #d4af37;
             border-radius: 15px;
-            padding:20px;
-            text-align:center;
-            transition: 0.4s;
-            width:220px;
+            padding: 30px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.4s;
+            transform: skewY(-2deg);
         }
-        .player:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 0 20px #ff2a68;
-        }
-        .player img {
-            border-radius:50%;
-            margin-bottom:15px;
-            border:2px solid #ff2a68;
-        }
-        .player h3 {margin-bottom:5px; font-size:1.3rem; color:#ff78a6;}
-        .player p {font-size:1rem; color:#fff;}
 
-        /* NOTICIAS */
-        #news h2 {text-align:center; font-size:2.5rem; color:#ff2a68; margin-bottom:50px;}
-        .news {
+        .player-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(212, 175, 55, 0.1), transparent);
+            transform: rotate(45deg);
+            transition: all 0.6s;
+        }
+
+        .player-card:hover::before {
+            left: 100%;
+        }
+
+        .player-card:hover {
+            transform: skewY(-2deg) translateY(-10px);
+            box-shadow: 0 15px 40px rgba(212, 175, 55, 0.4);
+            border-color: #ffd700;
+        }
+
+        .player-avatar {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #d4af37 0%, #ffd700 100%);
+            margin: 0 auto 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 60px;
+            font-weight: 900;
+            color: #0a0a0a;
+            border: 4px solid #ffd700;
+            box-shadow: 0 0 30px rgba(212, 175, 55, 0.5);
+        }
+
+        .player-name {
+            font-size: 28px;
+            font-weight: 900;
+            margin: 15px 0;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: #d4af37;
+        }
+
+        .player-role {
+            font-size: 14px;
+            color: #888;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            margin-bottom: 20px;
+        }
+
+        .player-stats {
             display: grid;
-            grid-template-columns: repeat(auto-fit,minmax(250px,1fr));
-            gap:30px;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+            margin-top: 20px;
         }
-        .news article {
-            background: #1a1a1a;
-            border-left: 4px solid #ff2a68;
-            border-radius:10px;
-            padding:20px;
-            transition:0.3s;
+
+        .player-stat {
+            background: #0f0f0f;
+            padding: 10px;
+            border-radius: 5px;
+            border-left: 3px solid #d4af37;
         }
-        .news article:hover {
-            background:#2a2a2a;
+
+        .player-stat-value {
+            font-size: 24px;
+            font-weight: 900;
+            color: #d4af37;
+        }
+
+        .player-stat-label {
+            font-size: 11px;
+            color: #666;
+            text-transform: uppercase;
+        }
+
+        .coach-section {
+            max-width: 800px;
+            margin: 80px auto;
+            padding: 0 40px;
+        }
+
+        .coach-card {
+            background: linear-gradient(135deg, #d4af37 0%, #ffd700 100%);
+            border-radius: 15px;
+            padding: 50px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            color: #0a0a0a;
+            box-shadow: 0 20px 60px rgba(212, 175, 55, 0.6);
+        }
+
+        .coach-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            transform: rotate(45deg);
+            animation: coachShine 3s infinite;
+        }
+
+        @keyframes coachShine {
+            0%, 100% { right: -50%; }
+            50% { right: 150%; }
+        }
+
+        .news-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .news-card {
+            background: linear-gradient(135deg, #1a1a1a 0%, #0f0f0f 100%);
+            border: 2px solid #333;
+            border-radius: 15px;
+            padding: 30px;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.4s;
+        }
+
+        .news-card:hover {
+            transform: translateY(-10px);
+            border-color: #d4af37;
+            box-shadow: 0 15px 40px rgba(212, 175, 55, 0.3);
+        }
+
+        .news-card.featured {
+            grid-column: 1 / -1;
+            border: 3px solid #d4af37;
+            background: linear-gradient(135deg, #1a1a1a 0%, #2a2410 100%);
+        }
+
+        .news-badge {
+            display: inline-block;
+            background: #d4af37;
+            color: #0a0a0a;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 11px;
+            font-weight: 900;
+            letter-spacing: 2px;
+            margin-bottom: 15px;
+        }
+
+        .news-image {
+            font-size: 60px;
+            margin: 20px 0;
+            text-align: center;
+        }
+
+        .news-date {
+            font-size: 12px;
+            color: #d4af37;
+            letter-spacing: 2px;
+            font-weight: 700;
+            margin-bottom: 15px;
+        }
+
+        .news-title {
+            font-size: 24px;
+            font-weight: 900;
+            margin-bottom: 15px;
+            line-height: 1.3;
+        }
+
+        .news-excerpt {
+            color: #aaa;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+
+        .news-link {
+            color: #d4af37;
+            text-decoration: none;
+            font-weight: 700;
+            letter-spacing: 1px;
+            transition: all 0.3s;
+            display: inline-block;
+        }
+
+        .news-link:hover {
+            color: #ffd700;
+            transform: translateX(5px);
+        }
+
+        .stream-container {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .stream-main {
+            background: linear-gradient(135deg, #1a1a1a 0%, #0f0f0f 100%);
+            border: 3px solid #d4af37;
+            border-radius: 15px;
+            overflow: hidden;
+        }
+
+        .stream-player {
+            position: relative;
+            background: #000;
+            aspect-ratio: 16/9;
+        }
+
+        .live-indicator {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            background: #ff0000;
+            color: #fff;
+            padding: 8px 20px;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: 900;
+            letter-spacing: 2px;
+            z-index: 10;
+            animation: livePulse 2s infinite;
+        }
+
+        @keyframes livePulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.7; }
+        }
+
+        .stream-placeholder {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100%;
+            color: #666;
+        }
+
+        .stream-icon {
+            font-size: 80px;
+            margin-bottom: 20px;
+        }
+
+        .stream-placeholder h3 {
+            font-size: 28px;
+            margin-bottom: 10px;
+            color: #d4af37;
+        }
+
+        .viewer-count {
+            margin-top: 20px;
+            font-size: 18px;
+            color: #d4af37;
+        }
+
+        .stream-info {
+            padding: 25px;
+        }
+
+        .stream-title {
+            font-size: 20px;
+            margin-bottom: 15px;
+            line-height: 1.4;
+        }
+
+        .stream-tags {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .tag {
+            background: #d4af37;
+            color: #0a0a0a;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 700;
+            letter-spacing: 1px;
+        }
+
+        .stream-schedule {
+            background: linear-gradient(135deg, #1a1a1a 0%, #0f0f0f 100%);
+            border: 2px solid #333;
+            border-radius: 15px;
+            padding: 30px;
+        }
+
+        .stream-schedule h4 {
+            font-size: 20px;
+            margin-bottom: 25px;
+            color: #d4af37;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .schedule-item {
+            padding: 20px;
+            background: #0a0a0a;
+            border-left: 4px solid #d4af37;
+            border-radius: 5px;
+            margin-bottom: 15px;
+            transition: all 0.3s;
+        }
+
+        .schedule-item:hover {
+            transform: translateX(5px);
+            border-left-color: #ffd700;
+        }
+
+        .schedule-date {
+            font-size: 14px;
+            color: #d4af37;
+            font-weight: 700;
+            letter-spacing: 1px;
+            margin-bottom: 8px;
+        }
+
+        .schedule-event {
+            color: #ccc;
+            font-size: 16px;
+        }
+
+        .matches-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 25px;
+            margin-top: 40px;
+        }
+
+        .match-card {
+            background: linear-gradient(135deg, #1a1a1a 0%, #0f0f0f 100%);
+            border: 3px solid #333;
+            border-radius: 15px;
+            overflow: hidden;
+            transition: all 0.4s;
+        }
+
+        .match-card:hover {
             transform: translateY(-5px);
-            box-shadow:0 0 15px #ff2a68;
+            box-shadow: 0 10px 30px rgba(212, 175, 55, 0.3);
         }
-        .news article h3 {margin-bottom:10px; color:#ff78a6;}
-        .news article p {color:#fff;}
 
-        /* STREAM */
-        #stream h2 {text-align:center; font-size:2.5rem; color:#ff2a68; margin-bottom:40px;}
-        .stream {display:flex; justify-content:center;}
-        iframe {border-radius:15px; border:none;}
+        .match-card.victory {
+            border-color: #00ff88;
+        }
 
-        /* FOOTER */
-        footer {background:#1a1a1a; text-align:center; padding:30px; border-top:2px solid #ff2a68;}
-        footer a {margin:0 10px; color:#ff78a6;}
-        footer a:hover {color:#ff2a68;}
+        .match-card.defeat {
+            border-color: #ff4444;
+        }
 
-        @media(max-width:600px){
-            header {padding:15px 20px;}
-            .hero h2 {font-size:2.5rem;}
-            .hero p {font-size:1.1rem;}
+        .match-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 25px;
+            background: #0a0a0a;
+            border-bottom: 2px solid #333;
+        }
+
+        .match-result {
+            font-size: 14px;
+            font-weight: 900;
+            letter-spacing: 2px;
+            padding: 5px 15px;
+            border-radius: 20px;
+        }
+
+        .match-result.win {
+            background: #00ff88;
+            color: #0a0a0a;
+        }
+
+        .match-result.loss {
+            background: #ff4444;
+            color: #fff;
+        }
+
+        .match-date {
+            font-size: 12px;
+            color: #666;
+            letter-spacing: 1px;
+        }
+
+        .match-body {
+            display: grid;
+            grid-template-columns: 1fr auto 1fr;
+            align-items: center;
+            padding: 30px 25px;
+            gap: 20px;
+        }
+
+        .match-team {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .match-team.opponent {
+            opacity: 0.7;
+        }
+
+        .team-logo {
+            width: 60px;
+            height: 60px;
+            background: #d4af37;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            font-weight: 900;
+            color: #0a0a0a;
+        }
+
+        .team-name {
+            font-size: 14px;
+            font-weight: 700;
+            text-align: center;
+            letter-spacing: 1px;
+        }
+
+        .match-score {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            font-size: 48px;
+            font-weight: 900;
+        }
+
+        .score.win {
+            color: #00ff88;
+        }
+
+        .score.lose {
+            color: #ff4444;
+        }
+
+        .score-separator {
+            color: #333;
+        }
+
+        .match-footer {
+            display: flex;
+            justify-content: space-between;
+            padding: 15px 25px;
+            background: #0a0a0a;
+            border-top: 2px solid #333;
+            font-size: 13px;
+        }
+
+        .match-map {
+            color: #d4af37;
+            font-weight: 700;
+        }
+
+        .match-tournament {
+            color: #666;
+        }
+
+        .coach-avatar {
+            width: 180px;
+            height: 180px;
+            border-radius: 50%;
+            background: #0a0a0a;
+            margin: 0 auto 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 70px;
+            font-weight: 900;
+            color: #d4af37;
+            border: 5px solid #0a0a0a;
+            box-shadow: 0 0 40px rgba(0, 0, 0, 0.5);
+        }
+
+        .coach-name {
+            font-size: 36px;
+            font-weight: 900;
+            margin: 20px 0 10px;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+        }
+
+        .coach-role {
+            font-size: 18px;
+            text-transform: uppercase;
+            letter-spacing: 4px;
+            margin-bottom: 20px;
+            opacity: 0.8;
+        }
+
+        footer {
+            text-align: center;
+            padding: 60px 20px;
+            margin-top: 100px;
+            border-top: 2px solid #d4af37;
+            background: linear-gradient(180deg, transparent 0%, #1a1a1a 100%);
+        }
+
+        footer p {
+            color: #666;
+            font-size: 14px;
+            letter-spacing: 2px;
+        }
+
+        @media (max-width: 768px) {
+            .logo {
+                font-size: 70px;
+                padding: 15px 25px;
+            }
+
+            .subtitle {
+                font-size: 24px;
+            }
+
+            .section-title {
+                font-size: 32px;
+            }
+
+            .team-stats {
+                gap: 30px;
+            }
+
+            .players-grid {
+                grid-template-columns: 1fr;
+                padding: 0 20px;
+            }
+
+            .stream-container {
+                grid-template-columns: 1fr;
+            }
+
+            .matches-container {
+                grid-template-columns: 1fr;
+            }
+
+            .match-body {
+                gap: 10px;
+                padding: 20px 15px;
+            }
+
+            .match-score {
+                font-size: 32px;
+                gap: 10px;
+            }
+
+            .team-logo {
+                width: 50px;
+                height: 50px;
+                font-size: 16px;
+            }
+
+            nav {
+                padding: 0 20px;
+            }
+
+            .nav-container {
+                height: 70px;
+            }
+
+            .nav-logo {
+                font-size: 24px;
+            }
+
+            .nav-toggle {
+                display: flex;
+            }
+
+            .nav-menu {
+                position: absolute;
+                top: 70px;
+                left: 0;
+                right: 0;
+                background: rgba(10, 10, 10, 0.98);
+                flex-direction: column;
+                gap: 0;
+                padding: 20px 0;
+                transform: translateX(-100%);
+                transition: transform 0.3s;
+                border-bottom: 2px solid #d4af37;
+            }
+
+            .nav-menu.active {
+                transform: translateX(0);
+            }
+
+            .nav-menu li a {
+                padding: 15px 40px;
+                border-bottom: 1px solid #1a1a1a;
+            }
+
+            body {
+                padding-top: 70px;
+            }
         }
     </style>
 </head>
 <body>
-    <!-- HEADER -->
-    <header>
-        <h1>ESENCIA</h1>
-        <nav>
-            <a href="#roster">Roster</a>
-            <a href="#news">Noticias</a>
-            <a href="#stream">Stream</a>
-            <a href="#contact">Contacto</a>
-        </nav>
+    <div class="background"></div>
+
+    <nav>
+        <div class="nav-container">
+            <div class="nav-logo">ES3</div>
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="#inicio">Inicio</a></li>
+                <li><a href="#roster">Roster</a></li>
+                <li><a href="#noticias">Noticias</a></li>
+                <li><a href="#directo">Directo</a></li>
+                <li><a href="#partidas">Partidas</a></li>
+                <li><a href="#contacto">Contacto</a></li>
+            </ul>
+            <div class="nav-toggle" id="navToggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <header id="inicio">>
+        <div class="logo-container">
+            <div class="logo">ES3</div>
+        </div>
+        <div class="subtitle">ESENCIA</div>
+        <div class="team-stats">
+            <div class="stat-box">
+                <div class="stat-number">15</div>
+                <div class="stat-label">Victorias</div>
+            </div>
+            <div class="stat-box">
+                <div class="stat-number">#3</div>
+                <div class="stat-label">Ranking</div>
+            </div>
+            <div class="stat-box">
+                <div class="stat-number">87%</div>
+                <div class="stat-label">Win Rate</div>
+            </div>
+        </div>
     </header>
 
-    <!-- HERO -->
-    <section class="hero">
-        <h2>ESENCIA</h2>
-        <p>Dominamos el CS2 con estilo y estrategia</p>
-    </section>
-
-    <!-- ROSTER -->
     <section id="roster">
-        <h2>Roster</h2>
-        <div class="roster">
-            <div class="player">
-                <img src="https://via.placeholder.com/200" alt="Jugador 1">
-                <h3>DORITOO</h3>
-                <p>AWP / IGL</p>
-            </div>
-            <div class="player">
-                <img src="https://via.placeholder.com/200" alt="Jugador 2">
-                <h3>Player2</h3>
-                <p>Rifler / Entry</p>
-            </div>
-            <div class="player">
-                <img src="https://via.placeholder.com/200" alt="Jugador 3">
-                <h3>Player3</h3>
-                <p>Rifler / Support</p>
-            </div>
-            <div class="player">
-                <img src="https://via.placeholder.com/200" alt="Jugador 4">
-                <h3>Player4</h3>
-                <p>Lurker</p>
-            </div>
-            <div class="player">
-                <img src="https://via.placeholder.com/200" alt="Jugador 5">
-                <h3>Player5</h3>
-                <p>Rifler</p>
+        <h2 class="section-title">Roster</h2>
+
+    <div class="players-grid">
+        <div class="player-card">
+            <div class="player-avatar">P1</div>
+            <div class="player-name">PLAYER ONE</div>
+            <div class="player-role">Entry Fragger</div>
+            <div class="player-stats">
+                <div class="player-stat">
+                    <div class="player-stat-value">1.25</div>
+                    <div class="player-stat-label">K/D Ratio</div>
+                </div>
+                <div class="player-stat">
+                    <div class="player-stat-value">78%</div>
+                    <div class="player-stat-label">HS Rate</div>
+                </div>
+                <div class="player-stat">
+                    <div class="player-stat-value">85</div>
+                    <div class="player-stat-label">ADR</div>
+                </div>
+                <div class="player-stat">
+                    <div class="player-stat-value">1.18</div>
+                    <div class="player-stat-label">Rating</div>
+                </div>
             </div>
         </div>
-    </section>
 
-    <!-- NOTICIAS -->
-    <section id="news">
-        <h2>Últimas Noticias</h2>
-        <div class="news">
-            <article>
-                <h3>Victoria en Torneo Local</h3>
-                <p>ESENCIA gana el torneo X con un marcador de 2-0. ¡Gran actuación de todo el roster!</p>
-            </article>
-            <article>
-                <h3>Nuevo Sponsor</h3>
-                <p>Estamos emocionados de anunciar a nuestro nuevo patrocinador oficial: XYZ. ¡Apoyando al equipo esta temporada!</p>
-            </article>
+        <div class="player-card">
+            <div class="player-avatar">P2</div>
+            <div class="player-name">PLAYER TWO</div>
+            <div class="player-role">AWPer</div>
+            <div class="player-stats">
+                <div class="player-stat">
+                    <div class="player-stat-value">1.32</div>
+                    <div class="player-stat-label">K/D Ratio</div>
+                </div>
+                <div class="player-stat">
+                    <div class="player-stat-value">65%</div>
+                    <div class="player-stat-label">HS Rate</div>
+                </div>
+                <div class="player-stat">
+                    <div class="player-stat-value">92</div>
+                    <div class="player-stat-label">ADR</div>
+                </div>
+                <div class="player-stat">
+                    <div class="player-stat-value">1.28</div>
+                    <div class="player-stat-label">Rating</div>
+                </div>
+            </div>
         </div>
-    </section>
 
-    <!-- STREAM -->
-    <section id="stream">
-        <h2>Stream en Vivo</h2>
-        <div class="stream">
-            <iframe src="https://player.twitch.tv/?channel=tu_canal&parent=localhost" height="480" width="720" allowfullscreen></iframe>
+        <div class="player-card">
+            <div class="player-avatar">P3</div>
+            <div class="player-name">PLAYER THREE</div>
+            <div class="player-role">IGL / Support</div>
+            <div class="player-stats">
+                <div class="player-stat">
+                    <div class="player-stat-value">1.08</div>
+                    <div class="player-stat-label">K/D Ratio</div>
+                </div>
+                <div class="player-stat">
+                    <div class="player-stat-value">72%</div>
+                    <div class="player-stat-label">HS Rate</div>
+                </div>
+                <div class="player-stat">
+                    <div class="player-stat-value">76</div>
+                    <div class="player-stat-label">ADR</div>
+                </div>
+                <div class="player-stat">
+                    <div class="player-stat-value">1.12</div>
+                    <div class="player-stat-label">Rating</div>
+                </div>
+            </div>
         </div>
+
+        <div class="player-card">
+            <div class="player-avatar">P4</div>
+            <div class="player-name">PLAYER FOUR</div>
+            <div class="player-role">Lurker</div>
+            <div class="player-stats">
+                <div class="player-stat">
+                    <div class="player-stat-value">1.21</div>
+                    <div class="player-stat-label">K/D Ratio</div>
+                </div>
+                <div class="player-stat">
+                    <div class="player-stat-value">80%</div>
+                    <div class="player-stat-label">HS Rate</div>
+                </div>
+                <div class="player-stat">
+                    <div class="player-stat-value">83</div>
+                    <div class="player-stat-label">ADR</div>
+                </div>
+                <div class="player-stat">
+                    <div class="player-stat-value">1.20</div>
+                    <div class="player-stat-label">Rating</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="player-card">
+            <div class="player-avatar">P5</div>
+            <div class="player-name">PLAYER FIVE</div>
+            <div class="player-role">Rifler</div>
+            <div class="player-stats">
+                <div class="player-stat">
+                    <div class="player-stat-value">1.15</div>
+                    <div class="player-stat-label">K/D Ratio</div>
+                </div>
+                <div class="player-stat">
+                    <div class="player-stat-value">75%</div>
+                    <div class="player-stat-label">HS Rate</div>
+                </div>
+                <div class="player-stat">
+                    <div class="player-stat-value">81</div>
+                    <div class="player-stat-label">ADR</div>
+                </div>
+                <div class="player-stat">
+                    <div class="player-stat-value">1.16</div>
+                    <div class="player-stat-label">Rating</div>
+                </div>
+            </div>
+        </div>
+    </div>
     </section>
 
-    <!-- CONTACTO -->
-    <section id="contact">
-        <h2>Contacto</h2>
-        <p style="text-align:center;">Correo: <a href="mailto:esencia.team@gmail.com">esencia.team@gmail.com</a></p>
-        <p style="text-align:center;">
-            Redes: 
-            <a href="#">Twitter</a> | 
-            <a href="#">Instagram</a> | 
-            <a href="#">Discord</a>
-        </p>
+    <section id="noticias">
+        <div class="coach-section">
+        <h2 class="section-title">Entrenador</h2>
+        <div class="coach-card">
+            <div class="coach-avatar">C</div>
+            <div class="coach-name">COACH NAME</div>
+            <div class="coach-role">Head Coach & Analyst</div>
+            <p style="font-size: 16px; margin-top: 20px; line-height: 1.6;">
+                Liderando al equipo ES3 ESENCIA con estrategias innovadoras y análisis táctico profundo.
+                Experiencia en torneos de nivel profesional y desarrollo de talento.
+            </p>
+        </div>
+    </div>
+
+    <div class="coach-section">
+        <h2 class="section-title">Últimas Noticias</h2>
+        <div class="news-grid">
+            <div class="news-card featured">
+                <div class="news-badge">DESTACADO</div>
+                <div class="news-image">🏆</div>
+                <div class="news-date">03 NOV 2025</div>
+                <h3 class="news-title">ES3 ESENCIA Clasificados para la Gran Final</h3>
+                <p class="news-excerpt">El equipo ha conseguido su pase a la gran final tras una increíble remontada en las semifinales con un marcador de 16-14 en Mirage.</p>
+                <a href="#" class="news-link">Leer más →</a>
+            </div>
+            <div class="news-card">
+                <div class="news-image">📰</div>
+                <div class="news-date">01 NOV 2025</div>
+                <h3 class="news-title">Nuevas Estrategias Implementadas</h3>
+                <p class="news-excerpt">El coach revela las nuevas tácticas que han llevado al equipo a mejorar su win rate en un 15%.</p>
+                <a href="#" class="news-link">Leer más →</a>
+            </div>
+            <div class="news-card">
+                <div class="news-image">🎯</div>
+                <div class="news-date">28 OCT 2025</div>
+                <h3 class="news-title">Player Two MVP del Mes</h3>
+                <p class="news-excerpt">Nuestro AWPer ha sido elegido MVP del mes con un rating de 1.35 y clutches decisivos.</p>
+                <a href="#" class="news-link">Leer más →</a>
+            </div>
+        </div>
+    </div>
     </section>
 
-    <!-- FOOTER -->
-    <footer>
-        &copy; 2025 ESENCIA | Todos los derechos reservados
+    <section id="directo">
+        <div class="coach-section">
+        <h2 class="section-title">Directo del Equipo</h2>
+        <div class="stream-container">
+            <div class="stream-main">
+                <div class="stream-player">
+                    <div class="live-indicator">🔴 EN VIVO</div>
+                    <div class="stream-placeholder">
+                        <div class="stream-icon">📺</div>
+                        <h3>ENTRENAMIENTO EN VIVO</h3>
+                        <p>El equipo está practicando nuevas estrategias en Anubis</p>
+                        <div class="viewer-count">👁️ 2,547 espectadores</div>
+                    </div>
+                </div>
+                <div class="stream-info">
+                    <h3 class="stream-title">Práctica de ES3 ESENCIA - Preparación para la Final</h3>
+                    <div class="stream-tags">
+                        <span class="tag">CS2</span>
+                        <span class="tag">Competitivo</span>
+                        <span class="tag">Español</span>
+                    </div>
+                </div>
+            </div>
+            <div class="stream-schedule">
+                <h4>Próximos Streams</h4>
+                <div class="schedule-item">
+                    <div class="schedule-date">06 NOV - 18:00</div>
+                    <div class="schedule-event">Scrim vs Team Rival</div>
+                </div>
+                <div class="schedule-item">
+                    <div class="schedule-date">07 NOV - 20:00</div>
+                    <div class="schedule-event">Análisis de Demos</div>
+                </div>
+                <div class="schedule-item">
+                    <div class="schedule-date">08 NOV - 19:00</div>
+                    <div class="schedule-event">Q&A con el Equipo</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    </section>
+
+    <section id="partidas">
+        <div class="coach-section">
+        <h2 class="section-title">Últimas Partidas</h2>
+        <div class="matches-container">
+            <div class="match-card victory">
+                <div class="match-header">
+                    <span class="match-result win">VICTORIA</span>
+                    <span class="match-date">04 NOV 2025</span>
+                </div>
+                <div class="match-body">
+                    <div class="match-team">
+                        <div class="team-logo">ES3</div>
+                        <div class="team-name">ES3 ESENCIA</div>
+                    </div>
+                    <div class="match-score">
+                        <div class="score win">16</div>
+                        <div class="score-separator">:</div>
+                        <div class="score lose">12</div>
+                    </div>
+                    <div class="match-team opponent">
+                        <div class="team-logo">OPP</div>
+                        <div class="team-name">Team Opponents</div>
+                    </div>
+                </div>
+                <div class="match-footer">
+                    <span class="match-map">🗺️ Mirage</span>
+                    <span class="match-tournament">Semifinal - Tournament Pro</span>
+                </div>
+            </div>
+
+            <div class="match-card victory">
+                <div class="match-header">
+                    <span class="match-result win">VICTORIA</span>
+                    <span class="match-date">02 NOV 2025</span>
+                </div>
+                <div class="match-body">
+                    <div class="match-team">
+                        <div class="team-logo">ES3</div>
+                        <div class="team-name">ES3 ESENCIA</div>
+                    </div>
+                    <div class="match-score">
+                        <div class="score win">16</div>
+                        <div class="score-separator">:</div>
+                        <div class="score lose">9</div>
+                    </div>
+                    <div class="match-team opponent">
+                        <div class="team-logo">RVL</div>
+                        <div class="team-name">Team Rivals</div>
+                    </div>
+                </div>
+                <div class="match-footer">
+                    <span class="match-map">🗺️ Inferno</span>
+                    <span class="match-tournament">Cuartos de Final</span>
+                </div>
+            </div>
+
+            <div class="match-card defeat">
+                <div class="match-header">
+                    <span class="match-result loss">DERROTA</span>
+                    <span class="match-date">30 OCT 2025</span>
+                </div>
+                <div class="match-body">
+                    <div class="match-team">
+                        <div class="team-logo">ES3</div>
+                        <div class="team-name">ES3 ESENCIA</div>
+                    </div>
+                    <div class="match-score">
+                        <div class="score lose">13</div>
+                        <div class="score-separator">:</div>
+                        <div class="score win">16</div>
+                    </div>
+                    <div class="match-team opponent">
+                        <div class="team-logo">PRO</div>
+                        <div class="team-name">Pro Gaming</div>
+                    </div>
+                </div>
+                <div class="match-footer">
+                    <span class="match-map">🗺️ Nuke</span>
+                    <span class="match-tournament">Liga Regular</span>
+                </div>
+            </div>
+
+            <div class="match-card victory">
+                <div class="match-header">
+                    <span class="match-result win">VICTORIA</span>
+                    <span class="match-date">28 OCT 2025</span>
+                </div>
+                <div class="match-body">
+                    <div class="match-team">
+                        <div class="team-logo">ES3</div>
+                        <div class="team-name">ES3 ESENCIA</div>
+                    </div>
+                    <div class="match-score">
+                        <div class="score win">16</div>
+                        <div class="score-separator">:</div>
+                        <div class="score lose">11</div>
+                    </div>
+                    <div class="match-team opponent">
+                        <div class="team-logo">ELT</div>
+                        <div class="team-name">Elite Squad</div>
+                    </div>
+                </div>
+                <div class="match-footer">
+                    <span class="match-map">🗺️ Anubis</span>
+                    <span class="match-tournament">Liga Regular</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    </section>
+
+    <footer id="contacto">>
+        <p>ES3 ESENCIA © 2025 | COUNTER-STRIKE 2 PROFESSIONAL TEAM</p>
     </footer>
 </body>
 </html>
