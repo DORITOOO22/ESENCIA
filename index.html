@@ -3,132 +3,146 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Team DORITOO - CS2</title>
-    <!-- Fuente Google Fonts -->
+    <title>ESENCIA - CS2 Team</title>
+    <!-- Fuente futurista -->
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
     <style>
-        /* Reset básico */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
+        /* Reset */
+        * {margin:0; padding:0; box-sizing:border-box;}
         body {
             font-family: 'Orbitron', sans-serif;
-            background-color: #0d0d0d;
-            color: #ffffff;
-            line-height: 1.6;
+            background-color: #0a0a0a;
+            color: #fff;
         }
+        a {text-decoration:none; color: #ff2a68;}
+        img {max-width:100%; display:block;}
 
-        a {
-            color: #ff4c4c;
-            text-decoration: none;
-        }
-
+        /* HEADER */
         header {
-            background-color: #1a1a1a;
-            padding: 20px;
+            position: fixed;
+            top:0; left:0; right:0;
+            background: rgba(10,10,10,0.95);
             display: flex;
             justify-content: space-between;
             align-items: center;
-            border-bottom: 2px solid #ff4c4c;
+            padding: 15px 50px;
+            z-index: 1000;
+            border-bottom: 2px solid #ff2a68;
         }
-
         header h1 {
             font-size: 2rem;
+            color: #ff2a68;
         }
-
         nav a {
-            margin-left: 20px;
+            margin-left: 25px;
             font-weight: bold;
+            transition: 0.3s;
         }
+        nav a:hover {color:#ff78a6;}
 
-        section {
-            padding: 60px 20px;
-        }
-
-        h2 {
-            color: #ff4c4c;
-            text-align: center;
-            margin-bottom: 40px;
-            font-size: 2rem;
-        }
-
-        /* Roster */
-        .roster {
+        /* HERO */
+        .hero {
+            height: 90vh;
+            background: linear-gradient(135deg,#0a0a0a,#1c1c1c), url('https://images.unsplash.com/photo-1603783184167-95e6e3e4f490?auto=format&fit=crop&w=1950&q=80') center/cover no-repeat;
             display: flex;
-            flex-wrap: wrap;
             justify-content: center;
-            gap: 30px;
-        }
-
-        .player {
-            background-color: #1a1a1a;
-            border: 2px solid #ff4c4c;
-            padding: 20px;
-            width: 200px;
-            text-align: center;
-            border-radius: 10px;
-        }
-
-        .player img {
-            width: 100%;
-            border-radius: 50%;
-            margin-bottom: 15px;
-        }
-
-        /* Noticias */
-        .news {
-            display: flex;
+            align-items: center;
             flex-direction: column;
-            gap: 20px;
-            max-width: 800px;
-            margin: auto;
-        }
-
-        .news article {
-            background-color: #1a1a1a;
-            border-left: 4px solid #ff4c4c;
-            padding: 15px;
-            border-radius: 5px;
-        }
-
-        /* Stream */
-        .stream {
-            display: flex;
-            justify-content: center;
-        }
-
-        iframe {
-            border: none;
-            border-radius: 10px;
-        }
-
-        /* Footer */
-        footer {
-            background-color: #1a1a1a;
-            padding: 20px;
             text-align: center;
-            border-top: 2px solid #ff4c4c;
+            color:#fff;
+            position: relative;
+        }
+        .hero::after {
+            content:'';
+            position:absolute;
+            top:0; left:0; right:0; bottom:0;
+            background: rgba(0,0,0,0.5);
+        }
+        .hero h2 {
+            font-size:4rem;
+            z-index:1;
+            color:#ff2a68;
+        }
+        .hero p {
+            font-size:1.5rem;
+            margin-top:15px;
+            z-index:1;
         }
 
-        footer a {
-            margin: 0 10px;
-        }
+        section {padding:100px 50px;}
 
-        @media(max-width: 600px){
-            .roster {
-                flex-direction: column;
-                align-items: center;
-            }
+        /* ROSTER */
+        #roster h2 {text-align:center; font-size:2.5rem; color:#ff2a68; margin-bottom:50px;}
+        .roster {
+            display: grid;
+            grid-template-columns: repeat(auto-fit,minmax(220px,1fr));
+            gap: 30px;
+            justify-items: center;
+        }
+        .player {
+            background: #1a1a1a;
+            border: 2px solid #ff2a68;
+            border-radius: 15px;
+            padding:20px;
+            text-align:center;
+            transition: 0.4s;
+            width:220px;
+        }
+        .player:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 0 20px #ff2a68;
+        }
+        .player img {
+            border-radius:50%;
+            margin-bottom:15px;
+            border:2px solid #ff2a68;
+        }
+        .player h3 {margin-bottom:5px; font-size:1.3rem; color:#ff78a6;}
+        .player p {font-size:1rem; color:#fff;}
+
+        /* NOTICIAS */
+        #news h2 {text-align:center; font-size:2.5rem; color:#ff2a68; margin-bottom:50px;}
+        .news {
+            display: grid;
+            grid-template-columns: repeat(auto-fit,minmax(250px,1fr));
+            gap:30px;
+        }
+        .news article {
+            background: #1a1a1a;
+            border-left: 4px solid #ff2a68;
+            border-radius:10px;
+            padding:20px;
+            transition:0.3s;
+        }
+        .news article:hover {
+            background:#2a2a2a;
+            transform: translateY(-5px);
+            box-shadow:0 0 15px #ff2a68;
+        }
+        .news article h3 {margin-bottom:10px; color:#ff78a6;}
+        .news article p {color:#fff;}
+
+        /* STREAM */
+        #stream h2 {text-align:center; font-size:2.5rem; color:#ff2a68; margin-bottom:40px;}
+        .stream {display:flex; justify-content:center;}
+        iframe {border-radius:15px; border:none;}
+
+        /* FOOTER */
+        footer {background:#1a1a1a; text-align:center; padding:30px; border-top:2px solid #ff2a68;}
+        footer a {margin:0 10px; color:#ff78a6;}
+        footer a:hover {color:#ff2a68;}
+
+        @media(max-width:600px){
+            header {padding:15px 20px;}
+            .hero h2 {font-size:2.5rem;}
+            .hero p {font-size:1.1rem;}
         }
     </style>
 </head>
 <body>
     <!-- HEADER -->
     <header>
-        <h1>Team DORITOO</h1>
+        <h1>ESENCIA</h1>
         <nav>
             <a href="#roster">Roster</a>
             <a href="#news">Noticias</a>
@@ -137,6 +151,12 @@
         </nav>
     </header>
 
+    <!-- HERO -->
+    <section class="hero">
+        <h2>ESENCIA</h2>
+        <p>Dominamos el CS2 con estilo y estrategia</p>
+    </section>
+
     <!-- ROSTER -->
     <section id="roster">
         <h2>Roster</h2>
@@ -144,7 +164,7 @@
             <div class="player">
                 <img src="https://via.placeholder.com/200" alt="Jugador 1">
                 <h3>DORITOO</h3>
-                <p>AWP / In-Game Leader</p>
+                <p>AWP / IGL</p>
             </div>
             <div class="player">
                 <img src="https://via.placeholder.com/200" alt="Jugador 2">
@@ -174,12 +194,12 @@
         <h2>Últimas Noticias</h2>
         <div class="news">
             <article>
-                <h3>Ganamos el torneo local</h3>
-                <p>El Team DORITOO se coronó campeón del torneo X con un marcador de 2-0. ¡Gran actuación de todo el roster!</p>
+                <h3>Victoria en Torneo Local</h3>
+                <p>ESENCIA gana el torneo X con un marcador de 2-0. ¡Gran actuación de todo el roster!</p>
             </article>
             <article>
-                <h3>Nuevo sponsor: XYZ</h3>
-                <p>Estamos emocionados de anunciar nuestro nuevo patrocinador oficial, XYZ, que apoyará al equipo esta temporada.</p>
+                <h3>Nuevo Sponsor</h3>
+                <p>Estamos emocionados de anunciar a nuestro nuevo patrocinador oficial: XYZ. ¡Apoyando al equipo esta temporada!</p>
             </article>
         </div>
     </section>
@@ -188,20 +208,14 @@
     <section id="stream">
         <h2>Stream en Vivo</h2>
         <div class="stream">
-            <!-- Cambia el src con tu canal de Twitch -->
-            <iframe
-                src="https://player.twitch.tv/?channel=tu_canal&parent=localhost"
-                height="480"
-                width="720"
-                allowfullscreen>
-            </iframe>
+            <iframe src="https://player.twitch.tv/?channel=tu_canal&parent=localhost" height="480" width="720" allowfullscreen></iframe>
         </div>
     </section>
 
     <!-- CONTACTO -->
     <section id="contact">
         <h2>Contacto</h2>
-        <p style="text-align:center;">Correo: <a href="mailto:teamdoritoo@gmail.com">teamdoritoo@gmail.com</a></p>
+        <p style="text-align:center;">Correo: <a href="mailto:esencia.team@gmail.com">esencia.team@gmail.com</a></p>
         <p style="text-align:center;">
             Redes: 
             <a href="#">Twitter</a> | 
@@ -212,8 +226,9 @@
 
     <!-- FOOTER -->
     <footer>
-        &copy; 2025 Team DORITOO | Todos los derechos reservados
+        &copy; 2025 ESENCIA | Todos los derechos reservados
     </footer>
 </body>
 </html>
+
 
